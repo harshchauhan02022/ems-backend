@@ -1,4 +1,3 @@
-const { log } = require('console');
 const { query } = require('./db');
 
 async function getmanagements() {

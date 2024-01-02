@@ -5,6 +5,7 @@ const { getmanagements, insertmanagements, updatemanagements, deletemanagements 
 const { register, login } = require('./services/auth');
 
 router.post("/user/register", async function (req, res, next) {
+  console.log("........harsh",req.body);
   try {
     const registerObj = req.body;
     const user = await register(registerObj);

@@ -8,15 +8,15 @@ const jwt = require("jsonwebtoken");
 var message, success;
 
 const register = async (data) => {
- const { name, email, phone, password } = data;
+ const { name, email,  password } = data;
 
  try {
   const salt = await bcrypt.genSalt(10);
   const hashedPassword = await bcrypt.hash(password, salt);
 
   const result = await query(
-   "INSERT INTO users(name, email, phone, password) VALUES(?, ?, ?, ?)",
-   [name, email, phone, hashedPassword]
+   "INSERT INTO users(name, email, password) VALUES(?, ?, ?)",
+   [name, email, hashedPassword]
   );
 
   if (result.affectedRows) {
