@@ -1,2 +1,1 @@
-# ems-backend
-Event Management System - backend
+# emp-backend

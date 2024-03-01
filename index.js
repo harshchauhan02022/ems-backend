@@ -1,29 +1,40 @@
-require('dotenv').config();
-const express = require('express');
+// app.js
+const express = require("express");
+const bodyParser = require("body-parser");
+const dotenv = require("dotenv");
+const userRoutes = require("./routes/userRoutes");
+const eventRoutes = require("./routes/eventRoutes");
+const sequelize = require("./config/db"); // Corrected path
+
+dotenv.config();
+
 const app = express();
-const port = process.env.PORT || 7000;
 
-const router = require("./routes")
-app.use(express.json());
-app.use(express.urlencoded({
-  extended: true
-})
-);
+// Middleware
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
-// Enable CORS for all routes
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*'); // Replace '*' with the specific origin(s) you want to allow
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type');
-  next();
-});
+// Routes
+app.use("/api/users", userRoutes);
+app.use("/api/events", eventRoutes);
 
-app.use("/", router);
+// Start server
+// sequelize.sync()
+//    .then(() => {
+//     console.log('Database successfully connected');
 
-app.get('/', (req, res) => {
-  res.json({ message: "hello how are you!" });
-});
+//     const PORT = process.env.PORT || 8000;
+//     app.listen(PORT, () => {
+//       console.log(`Server is running on port http://localhost:${PORT}`);
+//     });
+//    })
+//    .catch((err) => {
+//      console.error('Error:', err);
+ 
+ const PORT = process.env.PORT || 8000;
+ app.listen(PORT, () => {
+  console.log(`http://localhost:${PORT}`);
 
-app.listen(port, () => {
-  console.log(`Example http://localhost:${port}`);
-});
+    });
+
+
